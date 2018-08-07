@@ -11,28 +11,9 @@ base = Path(__file__).parent
 template_path.append(base / 'views')
 
 
-@route('/css/<filename>')
-def css_dir(filename):
-    """ set css dir """
-    return static_file(filename, root=base / "assets/css")
-
-
-@route('/js/<filename>')
-def js_dir(filename):
-    """ set js dir """
-    return static_file(filename, root=base / "assets/js")
-
-
-@route('/fonts/<filename>')
-def font_dir(filename):
-    """ set font file """
-    return static_file(filename, root=base / "assets/fonts")
-
-
-@route('/favicons/<filename>')
-def favicon_dir(filename):
-    """ set favicon file """
-    return static_file(filename, root=base / "assets/favicons")
+@route('/<filepath:path>')
+def static_files(filepath):
+    return static_file(Path(filepath).name, root=base / "assets" / Path(filepath).parent)
 
 
 @route('/')
