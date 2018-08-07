@@ -3,10 +3,7 @@
 {% block title %} Home {% endblock %}
 <!--ヘッダー情報を追加する場合はここに記述する。-->
 {% block header %}
-<script type="text/javascript">
-    $(document).ready(function () {
-    });
-</script> {% endblock%}
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script> {% endblock%}
 <!--base.html の contents の中に入れるコンテンツ-->
 {% block contents %}
 
@@ -67,7 +64,7 @@
     </div>
     {% endif %}
 </div>
-<div class="container">
+<div id="app" class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <div class="row">
@@ -77,12 +74,20 @@
             </div>
         </div>
         <div class="panel-body">
-            {{ info }}{{ warn }}{{ error }}
+            <p>[[message]]</p>
+            <p>{{ info }}{{ warn }}{{ error }}</p>
         </div>
         <div class="panel-footer">
             Panel-Footer
         </div>
     </div>
 </div>
-
-{% endblock %}
+<script>
+    var app = new Vue({
+        el: "#app",
+        delimiters: ["[[", "]]"],
+        data: {
+            message: "Hello Vue!"
+        }
+    })
+</script> {% endblock %}
